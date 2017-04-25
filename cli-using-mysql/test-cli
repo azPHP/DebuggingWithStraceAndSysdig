@@ -1,0 +1,15 @@
+#!/usr/bin/env php
+<?php
+
+$db = new mysqli('mysql', 'test', 'test', "test");
+
+$queries = [
+    "select * from user",
+    "select sleep(20)"
+];
+
+echo "I'm a pretend script, running some queries\n";
+foreach($queries as $query)
+{
+    $db->query($query);
+}

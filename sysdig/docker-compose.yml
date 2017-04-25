@@ -1,0 +1,19 @@
+version: "3"
+services:
+  mysql:
+    image: mysql/mysql-server
+    container_name: mysqlsysdig
+    environment:
+      - MYSQL_ROOT_PASSWORD=test
+      - MYSQL_USER=test
+      - MYSQL_PASSWORD=test
+      - MYSQL_DATABASE=test
+  php-fpm:
+    container_name: sysdig
+    cap_add:
+      - SYS_PTRACE
+    build: .
+    volumes:
+      - ./nginx-broken.conf:/etc/nginx/nginx.conf
+      - ./test:/var/www/html
+      - ./example.sh:/example.sh
