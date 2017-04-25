@@ -1,4 +1,4 @@
-version: "3"
+version: "2"
 services:
   mysql:
     image: mysql/mysql-server
@@ -9,11 +9,11 @@ services:
       - MYSQL_PASSWORD=test
       - MYSQL_DATABASE=test
   php-fpm:
-    container_name: sysdig
-    cap_add:
-      - SYS_PTRACE
+    container_name: php-fpm-sysdig
     build: .
+    ports:
+      - "9090:80"
     volumes:
-      - ./nginx-broken.conf:/etc/nginx/nginx.conf
+      - ./nginx.conf:/etc/nginx/nginx.conf
       - ./test:/var/www/html
       - ./example.sh:/example.sh
